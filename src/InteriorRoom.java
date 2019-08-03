@@ -52,6 +52,8 @@ public class InteriorRoom {
     public void setOptionList(List<Option> optionList) {
         this.optionList = optionList;
     }
+    
+    
 
     @Override
     public String toString() {

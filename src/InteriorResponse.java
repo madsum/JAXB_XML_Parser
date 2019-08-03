@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -23,11 +24,19 @@ public class InteriorResponse {
 
     @XmlElementWrapper(name = "OptionList")
     @XmlElement(name = "Option")
-    private List<String> optionList;
+    private List<Integer> optionList;
 
     @XmlElementWrapper(name = "CUList")
     @XmlElement(name = "CU")
     private List<InteriorRoom> cuList;
+    
+    @XmlTransient
+    private List<ColorUpholstery> colorUpholsteryList;
+    
+    @XmlTransient
+    private List<String> roomColorList;
+    @XmlTransient
+    private List<String> roomUpholsteryList; 
 
     public InteriorResponse() {
     }
@@ -76,11 +85,11 @@ public class InteriorResponse {
     }
 
     @XmlTransient
-    public List<String> getOptionList() {
+    public List<Integer> getOptionList() {
         return optionList;
     }
 
-    public void setOptionList(List<String> optionList) {
+    public void setOptionList(List<Integer> optionList) {
         this.optionList = optionList;
     }
 
@@ -92,8 +101,55 @@ public class InteriorResponse {
     public void setCuList(List<InteriorRoom> cuList) {
         this.cuList = cuList;
     }
+	
+	public List<String> getRoomColorList() {
+		return roomColorList;
+	}
 
-    @Override
+	public void setRoomColorList(List<String> roomColorList) {
+		this.roomColorList = roomColorList;
+	}
+
+	public List<String> getRoomUpholsteryList() {
+		return roomUpholsteryList;
+	}
+
+	public void setRoomUpholsteryList(List<String> roomUpholsteryList) {
+		this.roomUpholsteryList = roomUpholsteryList;
+	}
+
+	public void addRoomColor(String rooomColor) {
+			if(this.roomColorList == null) {
+				this.roomColorList = new ArrayList<String>();
+			}
+			roomColorList.add(rooomColor);
+	}
+	
+	public void addUpholstery(String rooomUpholstery) {
+		if(this.roomUpholsteryList == null) {
+			this.roomUpholsteryList = new ArrayList<String>();
+		}
+		roomUpholsteryList.add(rooomUpholstery);
+	}
+	
+	public List<ColorUpholstery> getColorUpholsteryList() {
+		return colorUpholsteryList;
+	}
+
+	public void setColorUpholsteryList(List<ColorUpholstery> colorUpholsteryList) {
+		this.colorUpholsteryList = colorUpholsteryList;
+	}
+
+	public void addColorUpholstery(String roomColor, String rooomUpholstery) {
+		if(this.colorUpholsteryList == null) {
+			this.colorUpholsteryList = new ArrayList<ColorUpholstery>();
+		}
+		ColorUpholstery colorUpholstery = new ColorUpholstery(roomColor, rooomUpholstery);
+		this.colorUpholsteryList.add(colorUpholstery);
+	}
+
+
+	@Override
     public String toString() {
         return "InteriorResponse{" + "sWeek=" + startWeek + ", eWeek=" + endWeek + ", pno12='" + pno12 + '\'' + ", featureList=" + featureList + ", optionList="
             + optionList + '}';
